@@ -46,14 +46,15 @@ const storage = new GridFsStorage({
 
 
 const upload = multer({ storage });
+
 router.post("/upload",upload.single("customFile"),(req, res, err) => {
-  res.send(req.body);
-  console.log(req.body);
+  res.send(req.file);
+  console.log(req.file);
 });
 
 
-router.get('/image/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+router.get('/imageByfilename/:filename', (req, res) => {
+  gfs.files.findOne({filename: req.params.filename }, (err, file) => {
 
     if (!file || file.length === 0) {
       return res.status(404).json({
@@ -75,4 +76,26 @@ router.get('/image/:filename', (req, res) => {
 });
 
 
+router.get('/imageByid/:id', (req, res) => {
+  var id = mongoose.Types.ObjectId(req.params.id);
+  gfs.files.findOne({_id:id}, (err, file) => {
+
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+
+    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+
+      const readstream = gfs.createReadStream(file.filename);
+      //console.log(res);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an image'
+      });
+    }
+  });
+});
 module.exports=router
