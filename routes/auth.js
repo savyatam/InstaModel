@@ -14,7 +14,7 @@ router.get('/',middleware,(req,res)=>{
 router.post('/signup',(req,res)=>{
   const {name,email,password}= req.body;
   if(!name||!password||!email)
-  return res.status(404).json({error:"Fill all required details"});
+  return res.status(404).json({error:"Fill all required fields"});
   User.findOne({email:email}).
   then((file)=>{
   if(file)
