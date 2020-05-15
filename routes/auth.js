@@ -12,7 +12,8 @@ router.get('/',middleware,(req,res)=>{
 });
 
 router.post('/signup',(req,res)=>{
-  const {name,email,password}= req.body;
+  const {name,email,password,image}= req.body;
+
   if(!name||!password||!email)
   return res.status(404).json({error:"Fill all required fields"});
   User.findOne({email:email}).
@@ -24,7 +25,8 @@ router.post('/signup',(req,res)=>{
            const p={
              name:name,
              email:email,
-             password:newpassword
+             password:newpassword,
+             image:image
                     };
              User.create(p).then((file)=>
             {console.log(file);}).catch(err=>{console.log(err);});
@@ -48,7 +50,7 @@ router.post('/signin',(req,res)=>{
       if(!exists)
       return res.send("Wrong password");
       const token=jsonwebtoken.sign({_id:file._id},JWT_SECRET);
-      res.json({token});
+      res.json({token,ID:file._id});
     }).catch(err=>{console.log(err);})
   })
   .catch(err=>{console.log(err);})
