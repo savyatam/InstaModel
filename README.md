@@ -9,6 +9,8 @@ Other features includes profile view,comments and likes.(Note:Access is not give
 
 ![Screenshot](InstaModel_signup.jpg)
 
+![Gif](http://g.recordit.co/2MFqHTWdAC.gif)
+
 
 ## Installation and Setup Instructions
 
