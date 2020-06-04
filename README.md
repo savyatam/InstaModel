@@ -1,6 +1,7 @@
 ## InstaModel
 
-An application used to post,delete,comment and like images, built with React, Redux, JavaScript,materialize, and CSS.
+This is backend of an application used to post and delete images, built with Nodejs,express,mongoDB.Frontend is built with React, Redux, JavaScript,materialize, and CSS.
+Other features includes profile view,comments and likes.(Note:Access is not given to delete others post)
 
 ## Project Screen Shots  
 
